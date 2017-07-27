@@ -17,7 +17,10 @@ Steps to execute the files:
 -> Change the database name and credentials of the MySQL server.
 
 -> Run the DataCOllection_YelpAPI.py file 
-i. In command prompt, you can run the file as: python DataCollection_YelpAPI.py (default values for term and location are "lunch" and        "Dallas, TX")
-ii. In command prompt, you can run the file by passing command line arguments as:
+
+->In command prompt, you can run the file as: python DataCollection_YelpAPI.py (default values for term and location are "lunch" and        "Dallas, TX")
+
+-> In command prompt, you can run the file by passing command line arguments as:
         python DataCollection_YelpAPI.py --term="dinner" --location="chicago,IL"
-iii. Creating a project in PyCharm and copying the files and run the DataCollection_YelpAPI.py
+
+-> Creating a project in PyCharm and copying the files and run the DataCollection_YelpAPI.py
