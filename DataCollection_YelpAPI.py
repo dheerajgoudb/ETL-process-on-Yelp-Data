@@ -1,6 +1,8 @@
 from __future__ import print_function
+import argparse
 import requests
 import sys
+import pprint
 
 # Importing functions from another file
 from DataLoading import Connection, Load
@@ -21,9 +23,9 @@ TOKEN_PATH = '/oauth2/token'
 GRANT_TYPE = 'client_credentials'
 
 # Default values
-DEFAULT_TERM = 'dinner'
+DEFAULT_TERM = 'lunch'
 DEFAULT_LOCATION = 'Dallas, TX'
-SEARCH_LIMIT = 3
+SEARCH_LIMIT = 20
 
 def obtain_bearer_token(host, path):
     """Given a bearer token, send a GET request to the API.
@@ -112,10 +114,21 @@ def query_api(term, location):
     # Data is Loaded into MySQL
     if Connection():
         Load(businesses)
+    # pprint.pprint(businesses, indent=2)
 
 def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-q', '--term', dest='term', default=DEFAULT_TERM,
+                        type=str, help='Search term (default: %(default)s)')
+    parser.add_argument('-l', '--location', dest='location',
+                        default=DEFAULT_LOCATION, type=str,
+                        help='Search location (default: %(default)s)')
+
+    input_values = parser.parse_args()
+
     try:
-        query_api(DEFAULT_TERM, DEFAULT_LOCATION)
+        query_api(input_values.term, input_values.location)
     except HTTPError as error:
         sys.exit(
             'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(
