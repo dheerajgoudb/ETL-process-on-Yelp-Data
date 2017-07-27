@@ -27,6 +27,8 @@ def Load(businesses):
     cursor = conn.cursor()
     for b in businesses:
         name = str(b['name'])
+        if name.__contains__("'"):
+            name = name.replace("'", "''")
         title = str(b['categories'][0]['alias'])
         address = str(b['location']['display_address'][0])
         rating = float(b['rating'])
